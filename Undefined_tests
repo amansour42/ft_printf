@@ -1,0 +1,90 @@
+
+FAILED TESTS:
+
+Big c:
+"%C", 0xdfff
+"%C", 0xbffe
+"%C", 0xdb02
+"%C", 0xd800
+"%C", (wint_t)-2
+"%C", 0x11ffff
+"%C", 256
+"yo%2C%-12lc et %C titi %C tyty", 'u', 254, 256, 'a'
+"%6C et coco %C titi %C tyty", 3250, 0xd800, 'u'
+"%8C et coco %C titi %lc", 3250, 0x11ffff, 'a'
+
+Big s:
+*/
+wchar_t	s[4];
+
+	s[0] = 0x53;
+	s[1] = 0x3abc;
+	s[2] = 0x81000;
+	s[3] = '\0';
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r1 = ft_printf("%9.6ls %S", s, (wchar_t *)'a');
+	data.s1 = ft_get_stdout(pfd, &save_stdout);
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r2 = printf("%9.6ls %S", s, (wchar_t *)'a');
+	data.s2 = ft_get_stdout(pfd, &save_stdout);
+*/
+wchar_t	s[4];
+
+	s[0] = 'a';
+	s[1] = 256;
+	s[2] = 'b';
+	s[3] = '\0';
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r1 = ft_printf("%9ls", s);
+	data.s1 = ft_get_stdout(pfd, &save_stdout);
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r2 = printf("%9ls", s);
+	data.s2 = ft_get_stdout(pfd, &save_stdout);
+*/
+s[0] = 0x53;
+	s[1] = 0x3abc;
+	s[2] = 0x81000;
+	s[3] = '\0';
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r1 = ft_printf("%.5ls", s);
+	data.s1 = ft_get_stdout(pfd, &save_stdout);
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r2 = printf("%.5ls", s);
+	data.s2 = ft_get_stdout(pfd, &save_stdout);
+*/
+wchar_t	s[4];
+
+	s[0] = 254;
+	s[1] = 256;
+	s[2] = 'b';
+	s[3] = '\0';
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r1 = ft_printf("%S", s);
+	data.s1 = ft_get_stdout(pfd, &save_stdout);
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r2 = printf("%S", s);
+	data.s2 = ft_get_stdout(pfd, &save_stdout);
+*/
+wchar_t	s[4];
+
+	setlocale(LC_ALL, "");
+	s[0] = 0x53;
+	s[1] = 0xd800;
+	s[2] = 0x81000;
+	s[3] = '\0';
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r1 = ft_printf("%S", s);
+	data.s1 = ft_get_stdout(pfd, &save_stdout);
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r2 = printf("%S", s);
+	data.s2 = ft_get_stdout(pfd, &save_stdout);
+*/
+Mixed test :
+ft_connect_stdout(pfd, &save_stdout);
+	data.r1 = ft_printf("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256);
+	data.s1 = ft_get_stdout(pfd, &save_stdout);
+	ft_connect_stdout(pfd, &save_stdout);
+	data.r2 = printf("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256);
+	data.s2 = ft_get_stdout(pfd, &save_stdout);
+
+
