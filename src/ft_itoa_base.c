@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 10:18:07 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/21 21:22:16 by amansour         ###   ########.fr       */
+/*   Updated: 2017/09/25 21:01:32 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char		*nbr_string(uintmax_t value, t_format format, char *op)
 
 	base = find_base(format.c, &s);
 	len = length(value, base);
-	if (format.precision > len)
+	if (format.precision > len || (!format.precision && !value))
 		len = format.precision;
 	if (op)
 		len += ft_strlen(op);
@@ -67,19 +67,18 @@ static char		*nbr_string(uintmax_t value, t_format format, char *op)
 
 char			*nbr_to_string(uintmax_t value, t_format format, int sign)
 {
-
 	if (sign < 0)
 		return (nbr_string(value, format, "-"));
     if (!value && !format.precision && (format.flag & ALTFLAG) && format.c == 'o')
         return ("0");
-	if (format.c != 'p' && !value && format.precision == 0)
-        return ("\0");
     if (format.c == 'p' && !value && format.precision == 0)
-        return ("0x");   
+        return ("0x");
     if (belong(format.c, "di") && (format.flag & SHOWSIGNFLAG))
 		return (nbr_string(value, format, "+"));
 	if (belong(format.c, "di") && (format.flag & SPACEFLAG))
 		return (nbr_string(value, format, " "));
+	if (format.c != 'p' && !value && format.precision == 0)
+        return ("\0");
 	if (format.c == 'p' || (value && format.c == 'x' && (format.flag & ALTFLAG)))
 		return (nbr_string(value, format, "0x"));
 	if (value && format.c == 'X' && (format.flag & ALTFLAG))

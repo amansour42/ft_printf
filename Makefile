@@ -6,7 +6,7 @@
 #    By: amansour <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 12:36:18 by amansour          #+#    #+#              #
-#    Updated: 2017/09/21 18:53:50 by amansour         ###   ########.fr        #
+#    Updated: 2017/09/25 18:00:25 by amansour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCLIB_NAME = ft_isdigit.c ft_strlen.c ft_wstrlen.c\
 	ft_bzero.c ft_memalloc.c\
 	ft_memset.c ft_upcase.c\
 	join.c convert_unicode.c\
-	ft_strcat.c ft_strcut.c ft_strncpy.c\
+	ft_strcat.c ft_strcut.c ft_strncpy.c ft_strchr.c\
 
 
 SRC_NAME = ft_printf.c no_printed_conv.c test.c util.c ft_itoa_base.c\

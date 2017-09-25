@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:59:43 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/21 20:18:22 by amansour         ###   ########.fr       */
+/*   Updated: 2017/09/25 17:31:48 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int		modifier(char **str)
 			nbr |= LONGDOUBLEMOD;
 		else if (**str == 'h' && (nbr & HALFMOD))
 			nbr |= HALFHALFMOD;
-		else if (**str == 'h')
-			nbr |= HALFMOD;
 		else if (**str == 'h')
 			nbr |= HALFMOD;
 		else if (**str == 'z')

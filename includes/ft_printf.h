@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 15:04:21 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/21 19:54:24 by amansour         ###   ########.fr       */
+/*   Updated: 2017/09/25 19:56:49 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define ASTERIXFLAG	0x20
 # define DOLLORFLAG		0x40
 # define LEADZEROFLAG	0x80
+# define CONV			"DdiuUxXoOnpCcsS%"
+# define OTHERS			"*#- +\'.lhjz"
 
 typedef struct			s_format
 {
@@ -86,4 +88,5 @@ void					join(char **str, char *u);
 char					*ft_strjoin(char const *str1, char const *str2);
 char					*convert_unicode(wchar_t wc);
 char					*convert_char(char c);
+char					*ft_strchr(const char *s, int c);
 #endif
