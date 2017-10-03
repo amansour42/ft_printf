@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:52:09 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:40:46 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/02 15:29:04 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,3 @@ int		belong(char c, char *str)
 		return (1);
 	return (0);
 }
-
-int		convert_number(char *str)
-{
-	int result;
-
-	result = 0;
-	while (*str && ft_isdigit(*str))
-	{
-		result = result * 10 + (*str) - 48;
-		++str;
-	}
-	return (result);
-}
-
-/*void	add_end(char **s, int n)
-{
-	char	*str;
-	int		i;
-
-	str = ft_lstnew(n);
-	ft_strcpy(str, *s);
-	i = ft_strlen(*s);
-	while (i < n)
-		str[i++] = ' ';
-	str[i] = '\0';
-	free(*s);
-	*s = str;
-	return ;
-}*/
-
-

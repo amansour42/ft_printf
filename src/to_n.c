@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   to_n.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 16:51:49 by amansour         ###   ########.fr       */
+/*   Created: 2017/10/02 15:22:20 by amansour          #+#    #+#             */
+/*   Updated: 2017/10/02 15:22:34 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_strdup(char const *s)
+void	to_n(t_format format, va_list *ap, int n)
 {
-	char	*str;
-	int		i;
+	void *ptr;
 
-	if (!s)
-		return (NULL);
-	str = (char *)malloc(ft_strlen(s) + 1);
-	if (str)
-	{
-		i = -1;
-		while (s[++i])
-			str[i] = s[i];
-		str[i] = '\0';
-	}
-	return (str);
+	ptr = va_arg(*ap, void*);
+	if (format.mod & LONGLONGMOD)
+		*(long long*)ptr = n;
+	else if (format.mod & LONGMOD)
+		*(long*)ptr = n;
+	else if (format.mod & HALFHALFMOD)
+		*(signed char*)ptr = n;
+	else if (format.mod & HALFMOD)
+		*(short*)ptr = n;
+	else if (format.mod & SIZETMOD)
+		*(size_t*)ptr = n;
+	else
+		*(int*)ptr = n;
+	return ;
 }

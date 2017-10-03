@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:59:43 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/25 17:31:48 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:06:31 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		flag(char **str)
 	int nbr;
 
 	nbr = 0;
-	while(**str && belong(**str, "#- +\'$0"))
+	while(**str && belong(**str, "#- +0"))
 	{
 		if (**str == '#')
 			nbr |= ALTFLAG;
@@ -28,12 +28,6 @@ int		flag(char **str)
 			nbr |= SHOWSIGNFLAG;
 		else if (**str == ' ')
 			nbr |= SPACEFLAG;
-		//else if (**str == '*')
-		  //  nbr |= ASTERIXFLAG; 
-		else if (**str == '\'')
-			nbr |= APOSTROPHEFLAG;
-		else if (**str == '$')
-			nbr |= DOLLORFLAG;
 		else
 			nbr |= LEADZEROFLAG;
 		++(*str);
@@ -78,14 +72,4 @@ int		string_to_int(char **str)
 		++(*str);
 	}
 	return (nbr);
-}
-
-char	*convert_char(char c)
-{
-	char *str;
-
-	str = ft_strnew(1);
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
 }

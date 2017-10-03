@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 09:50:53 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/25 20:25:56 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/03 17:12:12 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ int		ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int		result;
-	char	*str;
+	char	*s;
 
-	str = ft_strdup(format);
+	s = ft_strdup(format);
 	va_start(ap, format);
-	result = prints(&ap, str);
+	result = prints(&ap, s);
 	va_end(ap);
+	free(s);
 	return(result);
 }
 
@@ -35,59 +36,33 @@ int		prints(va_list *ap, char *str)
 	{
 		while (*str && *str != '%')
 		{
-			ft_putchar(*str);
-			++str;
+			write (1, str, 1);
 			++n;
+			++str;
 		}
-		if (*str == '%')
-			n+= test(&str, ap, n);
+		while (*str == '%')
+			test(&str, ap, &n);
 	}
 	return (n);
 }
 
-int		test(char **str, va_list *ap, int n)
+void	test(char **str, va_list *ap, int *n)
 {
 	t_format	format;
-	char		*s;
 
-	format.flag = 0;
-	format.mod = 0;
-	format.precision = -1;
 	format.width = 0;
-	++(*str);
-	while(**str && (ft_isdigit(**str) || belong(**str, OTHERS)))
-	{
-		format.flag |= flag(str);
-		format.width = (ft_isdigit(**str)) ? string_to_int(str) : format.width;
-		format.width = (**str == '*') ? va_arg(*ap, int) : format.width;
-		if (**str  == '*')
-			++(*str);
-		format.width = (ft_isdigit(**str)) ? string_to_int(str) : format.width;
-		if(**str == '.')
-		{
-			++(*str);
-			format.precision = (**str == '*') ? va_arg(*ap, int) : string_to_int(str);
-			//format.precision = string_to_int(str);
-			if (**str ==  '*')
-				++(*str);
-		}
-		//printf("After precision : %s\nprecision = %d\n", *str, format.precision);
-		format.mod |= modifier(str);
-		//printf("After mod : %s\n", *str);
-	}
-	//printf("width = %d\n", format.width);
-	//printf("Precision = %d\n", format.precision);
-    if (!(format.c = **str))
-        return (0);
+	format.flag = 0;
+	format.p = -1;
+	format.mod = 0;
+	fillFormat(str, &format, ap);
+	if (!format.c)
+		return ;
 	if (format.c == 'n')
-	{
-		conversion_n(format, ap, n);
-		return (0);
-	}
-	if (belong(format.c, CONV))
-		s = conversion_others(format, ap);
+		to_n(format, ap, *n);
+	else if (belong(format.c, CONV))
+		*n += display(conversion(format, ap), format);
 	else
-		s = convert_char(format.c);
+		*n += display(c_to_s(format.c), format);
 	++(*str);
-	return (display(s, format));
+	return ;
 }

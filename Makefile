@@ -6,7 +6,7 @@
 #    By: amansour <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 12:36:18 by amansour          #+#    #+#              #
-#    Updated: 2017/09/25 18:00:25 by amansour         ###   ########.fr        #
+#    Updated: 2017/10/03 16:50:48 by amansour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,18 +18,14 @@ SRCPATH = ./src
 OBJLIBPATH = ./objlib
 OBJPATH = ./obj
 
-SRCLIB_NAME = ft_isdigit.c ft_strlen.c ft_wstrlen.c\
-	ft_putchar.c ft_strjoin.c\
-	ft_strnew.c ft_putstr.c\
-	ft_strcpy.c ft_strdup.c\
-	ft_bzero.c ft_memalloc.c\
-	ft_memset.c ft_upcase.c\
-	join.c convert_unicode.c\
-	ft_strcat.c ft_strcut.c ft_strncpy.c ft_strchr.c\
+SRCLIB_NAME = ft_isdigit.c ft_strlen.c\
+	ft_strdup.c\
+	convert_unicode.c\
+	ft_wstrlen.c ft_strncpy.c\
 
-
-SRC_NAME = ft_printf.c no_printed_conv.c test.c util.c ft_itoa_base.c\
-		printed_conv.c display.c conversion.c\
+SRC_NAME = ft_printf.c conversion.c test.c util.c nbr_to_string.c\
+	to_n.c to_p.c to_bigC.c to_bigS.c to_string.c display.c\
+	to_sign_decimal.c to_decimal.c format.c\
 
 INCLUDS = includes/ft_printf.h
 
