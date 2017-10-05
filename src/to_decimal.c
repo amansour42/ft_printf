@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 15:21:02 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 15:15:13 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:33:47 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static uintmax_t	to_decimal(int mod, va_list *ap)
 	return (va_arg(*ap, unsigned int));
 }
 
-char				*to_Uu(t_format f, va_list *ap)
+char				*to_u(t_format f, va_list *ap)
 {
 	uintmax_t		a;
 	int				len_max;
@@ -41,10 +41,10 @@ char				*to_Uu(t_format f, va_list *ap)
 	len_max = MAX(length(a, 10), f.p);
 	if (f.p < 0 && !(f.flag & LEFTFORMATFLAG))
 		(f.flag & LEADZEROFLAG) ? len_max = MAX(len_max, f.width) : 0;
-	return(nbr_to_string(a, len_max, 10));
+	return (nbr_to_string(a, len_max, 10));
 }
 
-char				*to_Xx(t_format f, va_list *ap)
+char				*to_x(t_format f, va_list *ap)
 {
 	uintmax_t		a;
 	int				len_max;
@@ -60,20 +60,20 @@ char				*to_Xx(t_format f, va_list *ap)
 	if (f.c == 'x')
 		s = nbr_to_string(a, len_max, 16);
 	else
-		s = nbr_to_string(a, len_max, -16); 
+		s = nbr_to_string(a, len_max, -16);
 	if (a && f.flag & ALTFLAG)
 		s[1] = f.c;
 	return (s);
 }
 
-char				*to_Oo(t_format f, va_list *ap)
+char				*to_o(t_format f, va_list *ap)
 {
 	uintmax_t		a;
 	int				len_max;
 	char			*s;
 
 	(f.c == 'O') ? f.mod |= LONGMOD : 0;
-	if(!(a = to_decimal(f.mod, ap)) && !f.p)
+	if (!(a = to_decimal(f.mod, ap)) && !f.p)
 	{
 		if (f.flag & ALTFLAG)
 			return (c_to_s('0'));

@@ -6,12 +6,11 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 15:06:45 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 18:41:57 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:33:12 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 int		length(uintmax_t nbr, int base)
 {

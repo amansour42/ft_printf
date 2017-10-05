@@ -6,16 +6,15 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 14:23:56 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 15:59:04 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:36:35 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 int			wchar_len(wchar_t wc)
 {
-	if (wc <= 0xFF)
+	if (wc <= 0x7F)
 		return (1);
 	if (wc <= 0x7FF)
 		return (2);
@@ -43,14 +42,13 @@ void		convert_unicode(wchar_t wc, char **str, int *i)
 {
 	int size;
 
-	if (!(size = wchar_len(wc)))
-		return;
+	size = wchar_len(wc);
 	if (size == 1)
 		(*str)[*i + 0] = wc;
 	else if (size == 2)
 	{
 		(*str)[1 + *i] = (wc & 0x3F) + 0x80;
-		(*str)[0 + *i] = (wc >> 6)+ 0xC0;
+		(*str)[0 + *i] = (wc >> 6) + 0xC0;
 	}
 	else if (size == 3)
 	{

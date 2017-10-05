@@ -6,7 +6,7 @@
 #    By: amansour <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 12:36:18 by amansour          #+#    #+#              #
-#    Updated: 2017/10/03 16:50:48 by amansour         ###   ########.fr        #
+#    Updated: 2017/10/04 15:07:07 by amansour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCLIB_NAME = ft_isdigit.c ft_strlen.c\
 	ft_wstrlen.c ft_strncpy.c\
 
 SRC_NAME = ft_printf.c conversion.c test.c util.c nbr_to_string.c\
-	to_n.c to_p.c to_bigC.c to_bigS.c to_string.c display.c\
+	to_n.c to_p.c to_bigc.c to_bigs.c to_string.c display.c\
 	to_sign_decimal.c to_decimal.c format.c\
 
 INCLUDS = includes/ft_printf.h

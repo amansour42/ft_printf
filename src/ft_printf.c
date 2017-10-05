@@ -6,12 +6,11 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 09:50:53 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 17:12:12 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:33:03 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 int		ft_printf(const char *format, ...)
 {
@@ -24,7 +23,7 @@ int		ft_printf(const char *format, ...)
 	result = prints(&ap, s);
 	va_end(ap);
 	free(s);
-	return(result);
+	return (result);
 }
 
 int		prints(va_list *ap, char *str)
@@ -32,37 +31,41 @@ int		prints(va_list *ap, char *str)
 	int n;
 
 	n = 0;
-	while (*str)
+	while (n != -1 && *str)
 	{
 		while (*str && *str != '%')
 		{
-			write (1, str, 1);
+			write(1, str, 1);
 			++n;
 			++str;
 		}
-		while (*str == '%')
-			test(&str, ap, &n);
+		if (*str == '%')
+			n = test(&str, ap, n);
 	}
 	return (n);
 }
 
-void	test(char **str, va_list *ap, int *n)
+int		test(char **str, va_list *ap, int n)
 {
 	t_format	format;
+	char		*s;
 
 	format.width = 0;
 	format.flag = 0;
 	format.p = -1;
 	format.mod = 0;
-	fillFormat(str, &format, ap);
-	if (!format.c)
-		return ;
+	if (!fill_format(str, &format, ap))
+		return (n);
 	if (format.c == 'n')
-		to_n(format, ap, *n);
-	else if (belong(format.c, CONV))
-		*n += display(conversion(format, ap), format);
-	else
-		*n += display(c_to_s(format.c), format);
-	++(*str);
-	return ;
+	{
+		to_n(format, ap, n);
+		return (n);
+	}
+	if (belong(format.c, CONV))
+	{
+		if (!(s = conversion(format, ap)))
+			return (-1);
+		return (n + display(s, format));
+	}
+	return (n + display(c_to_s(format.c), format));
 }

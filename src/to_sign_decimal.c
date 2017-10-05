@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 15:23:32 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 18:41:29 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:30:56 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ static intmax_t	to_sign_decimal(int mod, va_list *ap)
 	return (va_arg(*ap, int));
 }
 
-char			*to_Ddi(t_format f, va_list *ap)
+char			*to_di(t_format f, va_list *ap)
 {
 	intmax_t	a;
 	int			len_max;
 	char		*s;
-
 
 	(f.c == 'D') ? f.mod |= LONGMOD : 0;
 	a = to_sign_decimal(f.mod, ap);

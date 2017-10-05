@@ -6,19 +6,18 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:59:43 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/02 17:06:31 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:28:55 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 int		flag(char **str)
 {
 	int nbr;
 
 	nbr = 0;
-	while(**str && belong(**str, "#- +0"))
+	while (**str && belong(**str, "#- +0"))
 	{
 		if (**str == '#')
 			nbr |= ALTFLAG;
@@ -66,7 +65,7 @@ int		string_to_int(char **str)
 	int nbr;
 
 	nbr = 0;
-	while(**str && ft_isdigit(**str))
+	while (**str && ft_isdigit(**str))
 	{
 		nbr = nbr * 10 + (**str - '0');
 		++(*str);

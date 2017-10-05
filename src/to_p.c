@@ -6,13 +6,13 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 10:30:50 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/03 16:35:27 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:30:19 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static char	* zero_with_precision(char *s)
+static char	*zero_with_precision(char *s)
 {
 	char		*s1;
 	size_t		i;
@@ -38,7 +38,7 @@ char		*to_p(t_format f, va_list *ap)
 	f.flag |= ALTFLAG;
 	f.mod |= LONGMOD;
 	f.c = 'x';
-	s = to_Xx(f, ap);
+	s = to_x(f, ap);
 	if (!*s)
 		return (ft_strdup("0x"));
 	i = 0;
