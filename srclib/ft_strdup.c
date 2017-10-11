@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:44:52 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/03 16:51:49 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 char	*ft_strdup(char const *s)
 {
-	char *str;
+	char	*str;
+	int		i;
 
 	if (!s)
 		return (NULL);
-	str = ft_strnew(ft_strlen(s));
+	str = (char *)malloc(ft_strlen(s) + 1);
 	if (str)
-		ft_strcpy(str, s);
+	{
+		i = -1;
+		while (s[++i])
+			str[i] = s[i];
+		str[i] = '\0';
+	}
 	return (str);
 }

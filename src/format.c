@@ -1,11 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   format.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/02 15:06:09 by amansour          #+#    #+#             */
+/*   Updated: 2017/10/05 11:32:47 by amansour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void    initFormat(t_format *format)
+int	fill_format(char **str, t_format *f, va_list *ap)
 {
-    (*format).flag = 0;
-    (*format).mod = 0;
-    (*format).precision = -1;
-    (*format).width = 0;
-    return ;
+	++(*str);
+	while (**str && (ft_isdigit(**str) || belong(**str, OTHERS)))
+	{
+		(*f).flag |= flag(str);
+		(ft_isdigit(**str)) ? (*f).width = string_to_int(str) : 0;
+		(**str == '*') ? (*f).width = va_arg(*ap, int) : 0;
+		(**str == '*') ? ++(*str) : 0;
+		(ft_isdigit(**str)) ? (*f).width = string_to_int(str) : 0;
+		if (**str == '.')
+		{
+			++(*str);
+			(*f).p = (**str == '*') ? va_arg(*ap, int) :
+				string_to_int(str);
+			(**str == '*') ? ++(*str) : 0;
+		}
+		(*f).mod |= modifier(str);
+	}
+	if (!((*f).c = **str))
+		return (0);
+	((*f).width < 0) ? (*f).flag |= LEFTFORMATFLAG : 0;
+	(*f).width = ABS((*f).width);
+	++(*str);
+	return (1);
 }

@@ -6,12 +6,11 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 11:36:55 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/29 10:14:23 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:51:19 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 static void		n_write(int n, char c)
 {
@@ -20,55 +19,27 @@ static void		n_write(int n, char c)
 	return ;
 }
 
-int			display_char(char c, t_format format)
-{
-	char l;
-
-	format.width = (!format.width) ? 1 : format.width;
-	l = (format.flag & LEADZEROFLAG) ? '0' : ' ';
-	if (format.flag & LEFTFORMATFLAG)
-	{
-		ft_putchar(c);
-		n_write(format.width - 1, ' ');
-	}
-	else
-	{
-		n_write(format.width - 1, l);
-		ft_putchar(c);
-	}
-	return (format.width);
-}
-
-int			display(char *str, t_format format)
+int				display(char *str, t_format f)
 {
 	int		len;
-	char    c;
+	char	c;
 
-	if (format.width < 0)
+	if (!(len = ft_strlen(str)) && (f.c == 'C' || f.c == 'c'))
+		++len;
+	if ((f.width > len) && ((f.flag & LEFTFORMATFLAG) || f.width < 0))
 	{
-		format.flag |= LEFTFORMATFLAG;
-		format.width = -format.width;
+		write(1, str, len);
+		n_write((f.width - len), ' ');
 	}
-	c = (!belong(format.c, "dDiuUxXoO") &&
-			(format.flag & LEADZEROFLAG)) ? '0' : ' ';
-	len = (!(*str) && (format.c == 'c' || format.c == 'C')) ? 1 : ft_strlen(str);
-	if (format.width > len)
+	else if (len < f.width)
 	{
-		if (format.flag & LEFTFORMATFLAG)
-		{
-			write(1, str, len);
-			n_write(format.width - len, ' ');
-		}
-		else if (!belong(format.c, "sScC%") && (format.flag & LEADZEROFLAG)
-				&& format.precision < 0)
-			write(1, str, len);
-		else
-		{
-			n_write(format.width - len, c);
-			write(1, str, len);
-		}
+		c = (f.flag & LEADZEROFLAG) ? '0' : ' ';
+		(f.p != -1 && belong(f.c, "dDiuUxXoOp") && c == '0') ? c = ' ' : 0;
+		n_write(f.width - len, c);
+		write(1, str, len);
 	}
 	else
 		write(1, str, len);
-	return ((len < format.width) ? format.width : len);
+	free(str);
+	return (MAX(f.width, len));
 }

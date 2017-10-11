@@ -6,80 +6,69 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/15 14:59:43 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/25 17:31:48 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:28:55 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
-int		flag(char *str, int *i)
+int		flag(char **str)
 {
 	int nbr;
 
 	nbr = 0;
-	while(str[*i] && belong(str[*i], "#- +0"))
+	while (**str && belong(**str, "#- +0"))
 	{
-		if (str[*i] == '#')
+		if (**str == '#')
 			nbr |= ALTFLAG;
-		else if (str[*i] == '-')
+		else if (**str == '-')
 			nbr |= LEFTFORMATFLAG;
-		else if (str[*i] == '+')
+		else if (**str == '+')
 			nbr |= SHOWSIGNFLAG;
-		else if (str[*i] == ' ')
+		else if (**str == ' ')
 			nbr |= SPACEFLAG;
 		else
 			nbr |= LEADZEROFLAG;
-		*i += 1;
+		++(*str);
 	}
 	return (nbr);
 }
 
-int		modifier(char *str, int *i)
+int		modifier(char **str)
 {
 	int nbr;
 
 	nbr = 0;
-	while (str[*i] && belong(str[*i], "lLhjz"))
+	while (**str && belong(**str, "lLhjz"))
 	{
-		if (str[*i] == 'l' && (nbr & LONGMOD))
+		if (**str == 'l' && (nbr & LONGMOD))
 			nbr |= LONGLONGMOD;
-		else if (str[*i] == 'l')
+		else if (**str == 'l')
 			nbr |= LONGMOD;
-		else if (str[*i] == 'L')
+		else if (**str == 'L')
 			nbr |= LONGDOUBLEMOD;
-		else if (str[*i] == 'h' && (nbr & HALFMOD))
+		else if (**str == 'h' && (nbr & HALFMOD))
 			nbr |= HALFHALFMOD;
-		else if (str[*i] == 'h')
+		else if (**str == 'h')
 			nbr |= HALFMOD;
-		else if (str[*i] == 'z')
+		else if (**str == 'z')
 			nbr |= SIZETMOD;
-		else if (str[*i] == 'j')
+		else if (**str == 'j')
 			nbr |= MAXMOD;
-		*i += 1;;
+		++(*str);
 	}
 	return (nbr);
 }
 
-int		string_to_int(char *str, int *i)
+int		string_to_int(char **str)
 {
 	int nbr;
 
 	nbr = 0;
-	while(str[*i] && ft_isdigit(str[*i]))
+	while (**str && ft_isdigit(**str))
 	{
-		nbr = nbr * 10 + (str[*i] - '0');
-		*i += 1;
+		nbr = nbr * 10 + (**str - '0');
+		++(*str);
 	}
 	return (nbr);
-}
-
-char	*convert_char(char c)
-{
-	char *str;
-
-	str = ft_strnew(1);
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
 }

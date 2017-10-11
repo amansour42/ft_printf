@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 15:21:02 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/05 11:33:47 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:53:56 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char				*to_u(t_format f, va_list *ap)
 	(f.c == 'U') ? f.mod |= LONGMOD : 0;
 	a = to_decimal(f.mod, ap);
 	if (!a && !f.p)
-		return ("\0");
+		return (ft_strdup(""));
 	len_max = MAX(length(a, 10), f.p);
 	if (f.p < 0 && !(f.flag & LEFTFORMATFLAG))
 		(f.flag & LEADZEROFLAG) ? len_max = MAX(len_max, f.width) : 0;
@@ -52,7 +52,7 @@ char				*to_x(t_format f, va_list *ap)
 
 	a = to_decimal(f.mod, ap);
 	if (!a && !f.p)
-		return ("\0");
+		return (ft_strdup(""));
 	len_max = MAX(length(a, 16), f.p);
 	len_max += (f.flag & ALTFLAG && a) ? 2 : 0;
 	if (f.p < 0 && !(f.flag & LEFTFORMATFLAG))
@@ -77,7 +77,7 @@ char				*to_o(t_format f, va_list *ap)
 	{
 		if (f.flag & ALTFLAG)
 			return (c_to_s('0'));
-		return ("\0");
+		return (ft_strdup(""));
 	}
 	len_max = MAX(length(a, 8), f.p);
 	len_max += (f.flag & ALTFLAG && a && f.p <= 0) ? 1 : 0;

@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 12:40:19 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/04 19:25:27 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:49:45 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*to_string(t_format f, va_list *ap)
 	char *s1;
 
 	if ((!(s = va_arg(*ap, char *)) && f.flag & LEADZEROFLAG) || f.p == 0)
-		return ("");
+		return (ft_strdup(""));
 	if (!s)
 		s = "(null)";
 	if (f.p < 0 || f.p >= (int)ft_strlen(s))
