@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 15:04:21 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/04 16:58:51 by amansour         ###   ########.fr       */
+/*   Updated: 2017/09/29 11:16:31 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdarg.h>
+# include <wchar.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <wchar.h>
@@ -36,8 +37,6 @@
 # define LEADZEROFLAG	0x80
 # define CONV			"DdiuUxXoOnpCcsS"
 # define OTHERS			"*#- +\'.lhjz"
-# define ABS(a)         (a >= 0) ? a : -a
-# define MAX(a, b)      (a > b) ? a : b
 
 typedef struct			s_format
 {
@@ -45,81 +44,56 @@ typedef struct			s_format
 	int					width;
 	int					mod;
 	char				c;
-	int					p;
+	int					precision;
 }						t_format;
-
-/*
-** ft_printf.c
-*/
 
 int						ft_printf(const char *format, ...);
 int						prints(va_list *ap, char *str);
-int						test(char **str, va_list *ap, int n);
-
-/*
-** util.c
-*/
-
+int                     test(char *str, va_list *ap, int *n);
+char					*ft_itoa_op(uintmax_t value, int base, int option);
 int						belong(char c, char *str);
-
-/*
-** conversion.c
-*/
-
-char					*conversion(t_format f, va_list *ap);
-char					*to_bigc(va_list *ap);
-char					*to_bigs(t_format f, va_list *ap);
-char					*to_u(t_format f, va_list *ap);
-char					*to_o(t_format f, va_list *ap);
-char					*to_x(t_format f, va_list *ap);
-char					*to_p(t_format f, va_list *ap);
-char					*to_di(t_format f, va_list *ap);
-void					to_n(t_format format, va_list *ap, int n);
-void					to_b(t_format format, va_list *ap);
-
-/*
-** to_string.c
-*/
-
-char					*to_string(t_format f, va_list *ap);
-char					*c_to_s(char c);
-
-/*
-** nbr_to_string.c
-*/
-
-int						length(uintmax_t nbr, int base);
-char					*nbr_to_string(uintmax_t v, int len, int base);
-
-/*
-** test.c
-*/
-
-int						string_to_int(char **str);
-int						flag(char **str);
-int						modifier(char **str);
-
-/*
-** display.c
-*/
-
-int						display(char *str, t_format format);
-
-/*
-** format.c
-*/
-int						fill_format(char **s, t_format *format, va_list *ap);
-
-/*
-** lib
-*/
-
+int						convert_number(char *str);
+void					ft_flag(char c, int *flag);
+char					*conversion(char c, va_list *ap, int flag, int *n);
+char					*alt_flag(char c);
+char					*to_sign_decimal(t_format format, va_list *ap);
+char					*to_decimal(t_format format, va_list *ap);
+char					*to_string(t_format format, va_list *ap);
+char					*nbr_to_string(uintmax_t v, t_format format, int s);
+//test.c
+int						string_to_int(char *str, int *i);
+int						flag(char *str, int *i);
+int						modifier(char *str, int *i);
+//display.c
+int 					display(char *str, t_format format);
+int						display_char(char c, t_format format);
+//
+void					conversion_n(t_format format, va_list *ap,int n);
+char					*conversion_others(t_format format, va_list *ap);
+//
+void                    initFormat(t_format *format);
+//
 int						wchar_len(wchar_t c);
 int						ws_len(wchar_t *wstr);
 int						ft_isdigit(int c);
+char					*ft_strcat(char *dest, const char *src);
+void					ft_putstr(char const *str);
+char					*ft_strcut(char *str, int n);
 char					*ft_strncpy(char *str1, const char *str2, size_t l);
+void					ft_putchar(char c);
 size_t					ft_strlen(char const *str);
-size_t					ft_wstrlen(wchar_t *wstr);
+size_t					ft_wstrlen(wchar_t *wstr);  
+char					*ft_strnew(size_t i);
+char					*ft_strjoin(char const *s1, char const *s2);
 char					*ft_strdup(const char *str);
-void					convert_unicode(wchar_t c, char **s, int *i);
+char					*ft_strcpy(char *s1, char const *s2);
+void					*ft_memset(void *s, int c, size_t n);
+void					*ft_memalloc(size_t n);
+void					ft_bzero(void *ptr, size_t p);
+int						ft_upcase(char c);
+void					join(char **str, char *u);
+char					*ft_strjoin(char const *str1, char const *str2);
+char					*convert_unicode(wchar_t wc);
+char					*convert_char(char c);
+char					*ft_strchr(const char *s, int c);
 #endif

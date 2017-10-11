@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:44:52 by amansour         ###   ########.fr       */
+/*   Created: 2017/04/17 16:40:11 by amansour          #+#    #+#             */
+/*   Updated: 2017/09/18 13:54:27 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_strdup(char const *s)
+void	ft_bzero(void *s, size_t n)
 {
-	char *str;
+	size_t	i;
 
-	if (!s)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
-	if (str)
-		ft_strcpy(str, s);
-	return (str);
+	i = 0;
+	while (i < n)
+	{
+		((char*)s)[i] = '\0';
+		i++;
+	}
+	return ;
 }

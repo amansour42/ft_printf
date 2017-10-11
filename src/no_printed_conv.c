@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   no_printed_conv.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:44:52 by amansour         ###   ########.fr       */
+/*   Created: 2017/09/19 12:55:48 by amansour          #+#    #+#             */
+/*   Updated: 2017/09/21 14:08:59 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_strdup(char const *s)
+void	conversion_n(t_format format, va_list *ap, int n)
 {
-	char *str;
+	void *ptr;
 
-	if (!s)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
-	if (str)
-		ft_strcpy(str, s);
-	return (str);
+	ptr = va_arg(*ap, void*);
+	if (format.mod & LONGLONGMOD)
+		*(long long*)ptr = n;
+	else if (format.mod & LONGMOD)
+		*(long*)ptr = n;
+	else if (format.mod & HALFHALFMOD)
+		*(signed char*)ptr = n;
+	else if (format.mod & HALFMOD)
+		*(short*)ptr = n;
+	else if (format.mod & SIZETMOD)
+		*(size_t*)ptr = n;
+	else
+		*(int*)ptr = n;
+	return ;
 }

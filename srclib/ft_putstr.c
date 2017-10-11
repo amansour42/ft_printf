@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:44:52 by amansour         ###   ########.fr       */
+/*   Created: 2017/05/01 11:38:32 by amansour          #+#    #+#             */
+/*   Updated: 2017/09/20 19:09:03 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
-char	*ft_strdup(char const *s)
+void	ft_putstr(char const *s)
 {
-	char *str;
-
-	if (!s)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
-	if (str)
-		ft_strcpy(str, s);
-	return (str);
+	if (s)
+	{
+		if (!(*s))
+			write(1, "\0", 1);
+		else
+			write(1, s, ft_strlen(s));
+	}
+	return ;
 }

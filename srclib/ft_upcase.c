@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_upcase.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:44:52 by amansour         ###   ########.fr       */
+/*   Created: 2017/09/18 16:42:11 by amansour          #+#    #+#             */
+/*   Updated: 2017/09/18 19:06:22 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_strdup(char const *s)
+int		ft_upcase(char c)
 {
-	char *str;
-
-	if (!s)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
-	if (str)
-		ft_strcpy(str, s);
-	return (str);
+	if (c <= 'Z' && c >= 'A')
+		return (1);
+	return (0);
 }

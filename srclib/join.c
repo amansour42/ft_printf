@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   join.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 17:14:41 by amansour          #+#    #+#             */
-/*   Updated: 2017/09/18 13:44:52 by amansour         ###   ########.fr       */
+/*   Created: 2017/09/19 14:19:37 by amansour          #+#    #+#             */
+/*   Updated: 2017/09/19 14:20:43 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_strdup(char const *s)
+void	join(char **str, char *u)
 {
-	char *str;
+	char *s;
 
-	if (!s)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
-	if (str)
-		ft_strcpy(str, s);
-	return (str);
+	s = ft_strjoin(*str, u);
+	free(*str);
+	free(u);
+	*str = s;
+	return ;
 }
