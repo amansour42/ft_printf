@@ -6,11 +6,12 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 10:35:30 by amansour          #+#    #+#             */
-/*   Updated: 2017/10/05 11:37:01 by amansour         ###   ########.fr       */
+/*   Updated: 2017/10/13 10:31:19 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 static int		wchar_to_write(int n, wchar_t *wstr)
 {

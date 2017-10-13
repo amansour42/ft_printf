@@ -6,7 +6,7 @@
 #    By: amansour <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 12:36:18 by amansour          #+#    #+#              #
-#    Updated: 2017/10/11 12:24:08 by amansour         ###   ########.fr        #
+#    Updated: 2017/10/04 15:07:07 by amansour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,7 @@ fclean: clean
 	rm -rf $(NAME)
 	@echo "\033[1;34mft_printf\t\033[1;33mCleaning lib\t\033[0;32m[OK]\033[0m"
 
-re: fclean
-	make
+re: fclean all
 
 norme: 
 	@norminette $(SRC) $(LIB) $(INCLUDS)
